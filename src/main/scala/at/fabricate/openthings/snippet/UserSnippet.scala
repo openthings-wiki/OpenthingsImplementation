@@ -110,7 +110,7 @@ with AddSkillsSnippet[User]  {
   
   //TODO: TACO rewrite this with QueryParams
   def queryItems(limit : Boolean) = { // , otherQueryParams = List(StartAt(curPage*itemsPerPage), MaxRows(itemsPerPage))
-    
+   
     var query = "select * from user where user_image IS NOT NULL AND (select count(*) from project where initiator = user.id > 0)" 
     
     if(limit)
