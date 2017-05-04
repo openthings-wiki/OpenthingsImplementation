@@ -9,7 +9,7 @@ import scala.xml.NodeSeq
 import net.liftweb.util._
 import net.liftweb.common._
 import net.liftweb.util.Helpers._
-import net.liftweb.mapper.{By, Descending, In, KeyedMapper, Like, MaxRows, OrderBy, QueryParam, StartAt, BySql, IHaveValidatedThisSQL}
+import net.liftweb.mapper.{By, Descending, In, KeyedMapper, Like, MaxRows, OrderBy, QueryParam, StartAt, BySql, IHaveValidatedThisSQL, NotNullRef}
 import at.fabricate.liftdev.common.model.{BaseEntityWithTitleAndDescription, BaseEntityWithTitleDescriptionIconAndCommonFields, BaseMetaEntityWithTitleDescriptionIconAndCommonFields, DifficultyEnum, LicenceEnum, StateEnum}
 import model.Project
 import scala.xml.Text
@@ -103,30 +103,28 @@ with AddSkillsSnippet[User]  {
    (super.asHtml(item))
   }
 
-   // remove this features
+  // remove these features
   override def create(xhtml: NodeSeq) : NodeSeq  = notAvailable
-  
   override def edit(xhtml: NodeSeq) : NodeSeq  =  notAvailable
   
-  //TODO: TACO rewrite this with QueryParams
-  def queryItems(limit : Boolean) = { // , otherQueryParams = List(StartAt(curPage*itemsPerPage), MaxRows(itemsPerPage))
-   
-    var query = "select * from user where user_image IS NOT NULL AND (select count(*) from project where initiator = user.id > 0)" 
+  //return all users that are on the current page
+  def queryItems(extraParams : List[QueryParam[User]]) : List[User] = {
     
-    if(limit)
-    {
-      val page = s"LIMIT ${curPage*itemsPerPage}, ${itemsPerPage};"
-      query += page
-    }
+    val hasProjectsClause : QueryParam[User] = BySql("(select count(*) from project where initiator = user.id > 0)", IHaveValidatedThisSQL("taco","2017-05-04"))
+    val hasIconClause : QueryParam[User] = NotNullRef(User.icon)
+
+    var query : List[QueryParam[User]] = List(hasIconClause, hasProjectsClause)
+    query = extraParams ::: query //concatenate the two lists
     
-    User.findAllByInsecureSql( query,
-         IHaveValidatedThisSQL("taco","2017-05-04")
-    ); 
+    User.findAll(query:_*)
   }
   
-  //get the length of all the items
-  override def count = queryItems(false).length
+  override def count = queryItems(List()).length
   
-  //get the items currently on the page
-  override def page = queryItems(true)
+  override def page = {
+      val startClause : QueryParam[User] = StartAt(curPage*itemsPerPage)
+      val maxClause : QueryParam[User] = MaxRows(itemsPerPage)
+      val limit : List[QueryParam[User]] = List(startClause, maxClause)
+      queryItems(limit)
+  }
 }
