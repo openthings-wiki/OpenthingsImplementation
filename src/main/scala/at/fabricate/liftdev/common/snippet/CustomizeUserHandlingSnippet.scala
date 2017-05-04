@@ -119,12 +119,12 @@ class CustomizeUserHandlingSnippet[T <: MegaProtoUser[T] with BaseEntityWithTitl
    */
   def login(xhtml: NodeSeq): NodeSeq = {
 		if (!userObject.loggedIn_?)
-            userObject.customLogin{
+            userObject.customLogin({
   			("#email" #> <input type="text" name="username" placeholder="Your mail address"/> & //FocusOnLoad()
   			"#password" #> <input type="password" name="password" placeholder="Your password"/> &
   			"#loginform [action]" #> S.uri
   			).apply(xhtml)
-            }
+            },S.uri) //redirect to current uri
 		else
 		  loggedInMessage
 
