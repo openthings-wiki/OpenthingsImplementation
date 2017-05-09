@@ -28,7 +28,8 @@ trait AddRatingSnippet[T <: BaseEntityWithTitleAndDescription[T] with AddRating[
 		  )
   
  	 def bindNewRatingCSS(item : ItemType) : CssSel = {
- 	   	 def createNewItem : item.TheRating = item.TheRating.create.ratedItem(item) 
+
+         def createNewItem : item.TheRating = item.TheRating.create.ratedItem(item) 
 		 
 		 listOfRatingOptionsCSStoInt.map({
 		   case (css, value) => {
@@ -66,11 +67,18 @@ trait AddRatingSnippet[T <: BaseEntityWithTitleAndDescription[T] with AddRating[
   
   
   abstract override def asHtml(item : ItemType) : CssSel = {
-		 
-//		println("chaining asHtml from AddCommentSnippet")
+	
+    if(!item.hasRated()){
      ("#rating" #> generateDisplayRating(item)  &
      "#newrating" #> bindNewRatingCSS(item)) &
-     // chain the css selectors 
      (super.asHtml(item))
+    }
+    else
+    {
+      ("#rating" #> generateDisplayRating(item))  &
+     "#newrating" #> NodeSeq.Empty &
+     (super.asHtml(item))
+    }
+
   }
 }
