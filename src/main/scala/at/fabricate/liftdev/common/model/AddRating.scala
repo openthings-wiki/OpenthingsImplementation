@@ -81,7 +81,7 @@ trait AddRating[T <: (AddRating[T]) ] extends BaseEntity[T]  with OneToMany[Long
 with Cascade[TheRating]
 
       
-      class TheRating extends LongKeyedMapper[TheRating] with IdPK with CreatedUpdated { // TODO:  with CreatedUpdated
+      class TheRating extends LongKeyedMapper[TheRating] with IdPK with CreatedUpdated { 
     	  def getSingleton = TheRating
 	    	  
 	      object ratedItem extends MappedLongForeignKey(this,self.getSingleton)
@@ -114,7 +114,7 @@ with Cascade[TheRating]
 		  0.0d
   }
 
-  //returns true if there is more than one rating 
+  //returns true if there is one or more rating 
   //with the current user id as authorId for this project
   def hasRated() : Boolean = 
   {
