@@ -146,7 +146,13 @@ trait AddRepositorySnippet[T <: BaseEntityWithTitleAndDescription[T] with AddRep
 			  "#listcommits" #> listAllCommits(item ) &	
 			  "#repositorystatus" #> <ul>{update.map({case (typeOfUpdate, listOfUpdate) => <li>{typeOfUpdate+listOfUpdate.mkString("",", ","") }</li>})}</ul> & 
 
-		      "#commitrepo [onclick]" #> SHtml.ajaxInvoke(commitRepository(item) ) &
+              "#commitrepo [onclick]" #> SHtml.ajaxInvoke(commitRepository(item) ) &
+              "#download-latest-commit [href]" #> "/%s/%s/%s/%s/%s.zip".format(
+                item.basePathToRepository, 
+                item.repositoryID,
+                item.endPathToData,
+                item.repository.getAllCommits.head.getName(), //head (first elem of scala list) contains the latest commit
+                item.repositoryID)  &
 		      "#fileupload [data-url]" #> "/%s/%s/%s/%s".format(
 		          item.apiPath, 
 		          item.uploadPath,
