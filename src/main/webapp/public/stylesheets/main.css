@@ -183,7 +183,10 @@ select {
   background-repeat: no-repeat;
   background-position: calc(100% - 10px) center;
   background-size: 5%;
-  padding: 0.625em 1.875em 0.625em 0.625em !important; }
+  padding: 0.625em 1.875em 0.625em 0.625em !important;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; }
 
 .projectVersions input {
   float: left;
