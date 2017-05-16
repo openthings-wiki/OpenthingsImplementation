@@ -24,7 +24,7 @@ import at.fabricate.openthings.snippet.ProjectSnippet
 * @author Johannes Fischer **/
 
 object Project extends Project with BaseMetaEntity[Project] with BaseMetaEntityWithTitleDescriptionIconAndCommonFields[Project] with AddRepositoryMeta[Project]
-with AddSkillsMeta[Project] {
+with AddSkillsMeta[Project] with AddImagesMeta[Project] {
   
   
 }
@@ -33,7 +33,7 @@ with AddSkillsMeta[Project] {
 /**Beschreibt eine Projekt-Instanz
 * @author Johannes Fischer **/
 class Project extends BaseEntity[Project] with BaseEntityWithTitleDescriptionIconAndCommonFields[Project] with AddRepository[Project]
-with AddSkills[Project] {
+with AddSkills[Project] with AddImages[Project] {
 
     // definitions for AddTag
   type TheTagType = Tag
@@ -47,11 +47,18 @@ with AddSkills[Project] {
   type TheCategoryType = Category
   def theCategoryObject = Category
   
+  // definitions for AddImages
+  type TheImageType = Image
+  def theImageObject = Image
+  
   // definitions for AddCreatedBy and maybe some others
   type TheUserType = User
   def theUserObject = User
   
   override def getCurrentUser = User.currentUser
+
+  override val teaserLength = 500
+  override val descriptionLength = 60000
 
   // override icon-image settings
   override def defaultIcon = "/public/images/noproject.jpg"
@@ -115,11 +122,11 @@ with AddSkills[Project] {
         ("rating" -> accumulatedRatings.get ) ~ // generateDisplayRating()) ~
         ("icon" -> "%s%s".format(serverURI,icon.url)  ) ~
         ("creator" -> JObject(
-            JField("name", createdByUser.obj.get.defaultTranslation.getObjectOrHead.title.get) ::
-            JField("id", createdByUser.obj.get.id.get  ) ::
+            JField("name", createdByUser.obj.openOrThrowException("Empty Box opened").defaultTranslation.getObjectOrHead.title.get) ::
+            JField("id", createdByUser.obj.openOrThrowException("Empty Box opened").id.get  ) ::
             Nil)
         ) ~
-        ("url" -> "%s%s".format(serverURI,ProjectSnippet.urlToViewItem(this))  ) ~
+        ("url" -> "%s%s".format(serverURI,ProjectSnippet.urlToViewItem(this))) ~
         ("id" -> id.get) 
       )
   }

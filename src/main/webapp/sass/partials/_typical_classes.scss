@@ -1,12 +1,11 @@
-.right{
-	float: right;
-}
-.left{
-	float: left;
-}
+
 .hidden{
      opacity:0;
 }
 .visible{
      opacity:1;
+}
+
+.no-margin {
+  margin: 0 !important;
 }

@@ -38,7 +38,7 @@ import net.liftweb.common.Full
 import net.liftweb.common.Empty
 import lib.MatchString
 import model.BaseEntityWithTitleAndDescription
-import net.liftmodules.textile.TextileParser
+//import net.liftmodules.textile.TextileParser
 import java.util.Locale
 import net.liftweb.http.RedirectResponse
 import net.liftweb.common.Box
@@ -51,9 +51,12 @@ import scala.xml.Elem
 import net.liftweb.http.js.JsCmds.Replace
 import scala.xml.UnprefixedAttribute
 import scala.xml.Null
+import net.liftweb.http.PaginatorSnippet
 
+//import net.liftmodules.textile.TextileParser
+import at.fabricate.liftdev.common.lib.TextileParser
 
-abstract class BaseEntityWithTitleAndDescriptionSnippet[T <: BaseEntityWithTitleAndDescription[T]] extends EndlessScrollingPaginatorSnippet[T] with DispatchSnippet with Logger {
+abstract class BaseEntityWithTitleAndDescriptionSnippet[T <: BaseEntityWithTitleAndDescription[T]] extends CustomizedPaginatorSnippet[T] with DispatchSnippet with Logger {
 
   // ### Things that have to be defined/refined in subclasses/traits ###
      type ItemType = T
@@ -303,12 +306,12 @@ abstract class BaseEntityWithTitleAndDescriptionSnippet[T <: BaseEntityWithTitle
    
    // ### methods that will be stacked ###
    def localDispatch : DispatchIt = {    
-    case "list" => renderIt(_)
-    case "renderIt" => renderIt(_)
+    case "list" => render(_)
+    case "render" => render(_)
     case "edit" => edit _
     case "create" => create _
     case "view" => view(_)
-    case "paginate" => paginate _
+    case "paginate" => paginate(_)
     case "paginatecss" => paginatecss(_)
   }
   
@@ -428,3 +431,4 @@ abstract class BaseEntityWithTitleAndDescriptionSnippet[T <: BaseEntityWithTitle
 
   }
 }
+
