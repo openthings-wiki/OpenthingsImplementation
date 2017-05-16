@@ -44,3 +44,30 @@ $box: 40em;
 	-moz-box-shadow:$top $left $blur $color #{$inset};
 	box-shadow:$top $left $blur $color #{$inset};
 }
+
+
+@mixin breakpoint($point) {
+  @if $point == xxl {
+    @media (min-width: 112.5em) { @content; }
+  }
+
+  @if $point == xl {
+    @media (min-width: 80.0625em) { @content; }
+  }
+
+  @else if $point == l {
+    @media (max-width: 79.9em) { @content; }
+  }
+
+  @else if $point == ml {
+    @media (max-width: 77.5em) { @content; }
+  }
+
+  @else if $point == m {
+    @media (max-width: 48.0625em) { @content; }
+  }
+
+  @else if $point == s {
+    @media (max-width: 33.75em) { @content; }
+  }
+}

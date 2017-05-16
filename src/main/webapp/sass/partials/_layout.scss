@@ -8,11 +8,25 @@ body{
 
 .container {
   padding: $big-em;
+
+	@include breakpoint(m) {
+		padding: $small-em;
+	}
+}
+
+
+.container.medium {
+  padding: $medium-em;
 }
 
 .container-hor {
   padding: $big-em 0;
 
+}
+
+.mainContent {
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .projectComments ul,.mainContent, .projectHeader, .mainContent .projectComments li, .commentInput, .commentInput input, .commentInput textarea, .commentInput form, .addTutorial, .projectComments, .userDetails, .projectDetails, .userProjectVersions, .projectVersions, .detailedDescription, .bom{
@@ -37,6 +51,18 @@ body{
 
 .col-2{
 	width: 50%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+
+	@include breakpoint(s){
+		width: 100%;
+	}
+
+	// section {
+	// 	align-items: flex-start;
+	// 	flex-grow: 0;
+	// }
 }
 
 .main .col-2 {
@@ -107,4 +133,10 @@ body{
 
 #personalwebsite[href='']{
     display:none;
+}
+
+
+#list_items {
+	display: flex;
+	flex-wrap: wrap;
 }

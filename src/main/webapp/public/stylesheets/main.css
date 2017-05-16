@@ -107,46 +107,36 @@ h4, .delta,
 h5, .epsilon,
 h6, .zeta {
   margin: 0;
-  letter-spacing: 0.05em; }
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3em; }
 
 h1, .alpha {
   font-size: 1.5em;
-  line-height: 1.0476190476190477;
-  margin-bottom: 0.5238095238095238em;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.05em;
   text-transform: uppercase; }
 
 h2, .beta {
   font-size: 1.36875em;
-  line-height: 1.3968253968253967;
-  margin-bottom: 0.6984126984126984em;
   letter-spacing: 0.1em; }
 
 h3, .gamma {
-  font-size: 1.2125em;
-  margin: 0 0 1.5714285714285714em;
-  line-height: 1.5714285714285714; }
+  font-size: 1.2125em; }
 
 h4, .delta {
-  font-size: 1.1484375em;
-  line-height: 1.1972789115646258;
-  margin-bottom: 1.1972789115646258em; }
+  font-size: 1.1484375em; }
 
 h5, .epsilon {
-  font-size: 0.984375em;
-  line-height: 1.3968253968253967;
-  margin-bottom: 1.3968253968253967em; }
+  font-size: 0.984375em; }
 
 h6, .zeta {
   font-size: 0.875em;
-  line-height: 1.5714285714285714;
   margin-bottom: 1.5714285714285714em; }
 
 p,
 blockquote {
   font-size: 1em;
   margin: 0 0 1.5714285714285714em;
-  line-height: 1.5714285714285714;
+  line-height: 1.5;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   -ms-hyphens: auto;
@@ -168,7 +158,6 @@ a:hover {
   opacity: 0.8; }
 
 input, select, button, textarea, .btn {
-  font-size: 1.3125em;
   line-height: 1.5714285714285714; }
 
 i {
@@ -907,12 +896,6 @@ html, body, .blogMain, .blogArticle, .blogArticle header, .blog {
 .spacerline {
   width: 100%; }
 
-.right {
-  float: right; }
-
-.left {
-  float: left; }
-
 .hidden {
   opacity: 0; }
 
@@ -931,9 +914,22 @@ body {
 
 .container {
   padding: 3.125em; }
+  @media (max-width: 48.0625em) {
+    .container {
+      padding: 0.9375em; } }
+
+.container.medium {
+  padding: 1.875em; }
 
 .container-hor {
   padding: 3.125em 0; }
+
+.mainContent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
 
 .projectComments ul, .mainContent, .projectHeader, .mainContent .projectComments li, .commentInput, .commentInput input, .commentInput textarea, .commentInput form, .addTutorial, .projectComments, .userDetails, .projectDetails, .userProjectVersions, .projectVersions, .detailedDescription, .bom {
   width: 100%; }
@@ -951,7 +947,19 @@ body {
   text-align: center; }
 
 .col-2 {
-  width: 50%; }
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  @media (max-width: 33.75em) {
+    .col-2 {
+      width: 100%; } }
 
 .main .col-2 {
   box-shadow: inset 1px 0 0 0 #f2f2f2; }
@@ -1024,8 +1032,19 @@ body {
 #personalwebsite[href=''] {
   display: none; }
 
+#list_items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+
 .logo, .shareDesignBtn, .mainNavigation li, .mainNavigation li a {
   height: 100%; }
+
+@media (max-width: 48.0625em) {
+  .mainNavigation li.searchbar {
+    display: none; } }
 
 .mainNavigation {
   background-color: rgba(255, 255, 255, 0.9);
@@ -1453,6 +1472,11 @@ ul.tagit input[type="text"] {
   border-bottom: 1px solid #edebeb;
   color: #323232;
   text-align: center; }
+  .projectDetails ul, .userDetails ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%; }
 
 .projectDetails li span, .userDetails li span {
   font-size: 3em; }
@@ -1674,7 +1698,7 @@ ul.tagit input[type="text"] {
   font-size: 1.4em; }
 
 .signupHome {
-  max-width: 26em;
+  max-width: 23.4375em;
   background: white;
   margin-left: auto; }
 
@@ -1729,7 +1753,12 @@ ul.tagit input[type="text"] {
 
 .explainItems {
   width: 80%;
-  margin: auto; }
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
 
 .explainItems li h3 {
   font-size: 1.4em; }
@@ -2004,7 +2033,10 @@ ul.tagit input[type="text"] {
 .footerNav {
   width: 100%;
   background-color: white;
-  border-top: 1px solid #ddd; }
+  border-top: 1px solid #ddd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
 
 .footerNav section {
   width: 16%;
@@ -2015,9 +2047,8 @@ ul.tagit input[type="text"] {
   font-size: 0.875em; }
 
 .pagination {
-  padding: 40px 40px 10px;
-  width: 100%;
-  float: left; }
+  padding: 10px 40px 10px;
+  width: 100%; }
 
 .contactMaker {
   background: #f2f2f2;
@@ -2641,165 +2672,3 @@ img.mfp-img {
 
 .container #initiator {
   margin-bottom: .5em; }
-
-@media only screen and (max-width: 1280px) {
-  .mainContent .preview {
-    width: 33.33%; } }
-
-@media only screen and (max-width: 1280px) {
-  .mainNavigation li a, .editMenuHorizontal li {
-    padding: 0 .5em; }
-  .onoffswitch {
-    margin: 0.6em .5em; }
-  .editMenuHorizontal li {
-    display: none; }
-  .editMenuHorizontal li:first-child {
-    display: inline-block; }
-  .editMenuHorizontal {
-    font-size: 75%; } }
-
-@media only screen and (max-width: 930px) {
-  .col-2, .mainContent .projectHeader img, .mainContent .projectHeader .projectMainDes {
-    width: 100%; }
-  .mainContent .preview {
-    width: 50%; }
-  .mainNavigation ul {
-    padding: .5em 1em;
-    background: white; }
-  .mainNavigation {
-    background-color: white; }
-  .mainNavigation ul, .signupHome {
-    display: none; }
-  .mainNavigation ul li:last-child {
-    display: none; }
-  .mainNavigation ul span {
-    display: none; }
-  .mainNavigation li {
-    float: left !important;
-    width: 100%; }
-  a, .shareDesignBtn {
-    padding: 0 .4em; }
-  .shareDesignBtn {
-    color: #666666 !important; }
-  .shareDesignBtn {
-    background-color: transparent !important; }
-  .shareDesignBtn:hover {
-    background-color: transparent !important; }
-  .openMenu {
-    text-align: center;
-    display: block; }
-  .landingPageMain .preview {
-    display: none; }
-  .landingPageMain .preview:nth-of-type(3) {
-    display: none; }
-  .landingPageMain .preview:nth-of-type(1), .landingPageMain .preview:nth-of-type(2) {
-    display: block; }
-  .mainContent .homelist .preview {
-    width: 47% !important; }
-  .brandingText {
-    width: 100%; }
-  .introSection {
-    padding: 1.875em 0; }
-  .explainItems li span {
-    font-size: 3em; }
-  .explainItems li p {
-    font-size: .875em; }
-  .badgelogo {
-    display: none; }
-  .mainNavigation li:first-child a {
-    padding: 0 0.6em; }
-  .mainNavigation ul span {
-    display: inline-block; }
-  .introVid {
-    width: 80%; }
-  #searchform {
-    float: left;
-    top: 0;
-    left: 0; }
-  .mainNavigation li a {
-    padding: 0; }
-  .editMenuHorizontal {
-    font-size: 65%; } }
-
-@media only screen and (max-width: 880px) {
-  .editMenuHorizontal {
-    font-size: 45%; } }
-
-@media only screen and (max-width: 640px) {
-  .mainSearch {
-    font-size: .65em;
-    height: 65px; }
-  .editMenuHorizontal li, .mainNavigation li {
-    display: list-item;
-    text-align: left; }
-  #main {
-    margin-top: 50px; }
-  .footerNav section {
-    width: 40%;
-    margin: 0.9375em; }
-  .userProjectVersions, .detailedDescription {
-    padding: 0.9375em; }
-  .two-col {
-    width: 100%; }
-  .branding {
-    max-width: 100%; }
-  .signupHome {
-    max-width: 100%;
-    display: none; }
-  .mainContent .preview {
-    width: 96%; }
-  .mainNavigation li a, .shareDesignBtn {
-    padding: 0 0.6em; }
-  .loginBtn {
-    display: none; }
-  .mainSearch input {
-    width: 18em; }
-  .branding button {
-    margin-bottom: .5em; }
-  .projectDetails li, .userDetails li {
-    margin: 0 0 4% 0;
-    width: 50%; }
-  .editMenuHorizontal ul {
-    display: none; }
-  .landingPageMain .preview {
-    display: none; }
-  .mainContent .homelist .preview {
-    width: 96% !important; }
-  .brandingText {
-    width: 100%; }
-  .introSection {
-    padding: 1.875em 0; }
-  .explainItems li span {
-    font-size: 3em; }
-  .explainItems li p {
-    font-size: .875em; }
-  .badgelogo {
-    display: none; }
-  .landingPageMain .preview:nth-of-type(1), .landingPageMain .preview:nth-of-type(2) {
-    display: block; }
-  .mainNavigation li:first-child a {
-    padding: 0 0.6em; }
-  .mainNavigation ul span {
-    display: inline-block; }
-  .introVid {
-    width: 80%; } }
-
-@media only screen and (max-width: 420px) {
-  #searchform input {
-    width: 160px; }
-  .landingPageMain .preview {
-    display: none; }
-  .mainContent .homelist .preview {
-    width: 96% !important; }
-  .brandingText {
-    width: 100%; }
-  .introSection {
-    padding: 1.875em 0; }
-  .explainItems li span {
-    font-size: 3em; }
-  .explainItems li p {
-    font-size: .875em; }
-  .badgelogo {
-    display: none; }
-  .landingPageMain .preview:nth-of-type(1) {
-    display: block; } }

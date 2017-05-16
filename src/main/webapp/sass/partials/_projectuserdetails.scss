@@ -2,9 +2,14 @@
 	border-bottom: 1px solid $lightgrey;
 	color: $darkgrey;
 	text-align: center;
+
+	ul {
+		display: flex;
+		width: 100%;
+	}
 }
 .projectDetails li span, .userDetails li span{
-	font-size: 3em;	
+	font-size: 3em;
 }
 .projectDetails li h5, .userDetails li h5{
 	margin-top: 1em;
