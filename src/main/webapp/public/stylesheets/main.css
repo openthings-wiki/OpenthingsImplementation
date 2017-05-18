@@ -1299,7 +1299,12 @@ body {
 
 .tagsSection {
   width: 100%;
-  border-bottom: 1px solid #edebeb; }
+  border-bottom: 1px solid #edebeb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
 
 #selecttags {
   padding: 0.625em 0;
@@ -1340,6 +1345,13 @@ body {
 .newtag {
   margin-bottom: 0.625em;
   width: 100%; }
+
+.editPage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
 
 #listtags li a {
   color: white; }
