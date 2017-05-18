@@ -48,6 +48,10 @@
 .editPage {
 	display: flex;
 	flex-wrap: wrap;
+
+	form {
+		width: 100%;
+	}
 }
 
 #listtags li a{
