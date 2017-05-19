@@ -1352,6 +1352,8 @@ body {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap; }
+  .editPage form {
+    width: 100%; }
 
 #listtags li a {
   color: white; }
