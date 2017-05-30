@@ -29,19 +29,17 @@
   </head>
 
   <body data-lift="Login.account" id="onlinestatus" itemscope itemtype="http://schema.org/WebPage">
-
 		<section class="mainHeader">
 			<span data-lift="embed?what=modules/_navigation">Navigation</span>
 		</section>
 
-		<div data-lift="Msgs?showAll=true" class="alertmessages"></div>
 		<span data-lift="embed?what=modules/_addproject">AddProject</span>
 		<span data-lift="embed?what=modules/_login">Login</span>
 		<span data-lift="embed?what=modules/_logout">Logout</span>
 		<span data-lift="embed?what=modules/_account">Account</span>
 		<span data-lift="embed?what=modules/_editproject">Edit project</span>
 		<div data-lift="Login.account"><span id="onlinestatus" class="#"></span></div>
-  
+		<div data-lift="Msgs?showAll=true" class="alertmessages"></div> <!--this is the global messages container -->
     <div id="content">The main content will get bound here</div>
 		<div data-lift="embed?what=modules/_footernav">FooterNav</div>
 
