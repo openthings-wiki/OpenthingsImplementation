@@ -29,8 +29,10 @@ with AddImagesSnippet[Project]
   override def editTitle = "Edit Project"
     
     // configuration for lazy login
-      def checkIfUserCanSave[T <: Mapper[T]](item : T) = User.canEditContent(item)
+      def checkIfUserCanSave[T <: Mapper[T]](item : T) = User.canEditContent(item)|| User.canModerateContent(item) || User.canAdministerContent(item)
+      def checkIfUserCanUploadToRepo[T <: Mapper[T]](item : T) = User.canEditContent(item)
 
+      
       val loginLocation = "/"+LoginSnippet.loginTemlate // "/"+
       
           
@@ -39,13 +41,42 @@ with AddImagesSnippet[Project]
 
 
       val contentLanguage = UrlLocalizer.contentLocale
-    
+      
+      private def disableEditing(item : ItemType)(n: NodeSeq): NodeSeq = {    
+         if (checkIfUserCanSave(item)){
+           n
+         }
+         else {
+           NodeSeq.Empty
+         }
+  }
+ 
+        private def disableRepository(item : ItemType)(n: NodeSeq): NodeSeq = {    
+         if (checkIfUserCanUploadToRepo(item)){
+           n
+         }
+         else {
+           NodeSeq.Empty
+         }
+  }
 
    override def asHtml(item : ItemType) : CssSel = { 
    (   
-       "#personalwebsite" #> "" 
+       "#personalwebsite" #> "" &
+       "#edit_item_form" #> disableEditing(item) _ &
+       ".edit_project_button" #> disableEditing(item) _ &
+       ".edit_project_repository" #> disableRepository(item) _
    ) &
    (super.asHtml(item))
+  }
+   
+   override def toForm(item : ItemType) : CssSel = { 
+   (   
+       "#edit_item_form" #> disableEditing(item) _ &
+       ".edit_project_button" #> disableEditing(item) _&
+       ".edit_project_repository" #> disableRepository(item) _
+   ) &
+   (super.toForm(item))
   }
   
   override def edit(xhtml : NodeSeq) : NodeSeq = (   

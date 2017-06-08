@@ -28,7 +28,7 @@ import at.fabricate.openthings.snippet.ProjectSnippet
 import java.util.Locale
 import at.fabricate.liftdev.common.lib.FieldValidation
 
-object User extends User with MetaMegaProtoUser[User] with CustomizeUserHandling[User] with BaseMetaEntity[User] with BaseMetaEntityWithTitleDescriptionAndIcon[User]
+object User extends User with MetaMegaProtoUser[User] with CustomizeUserHandling[User] with BaseMetaEntity[User] with BaseMetaEntityWithTitleDescriptionAndIcon[User] 
 with AddSkillsMeta[User] {
 
 
@@ -73,7 +73,8 @@ with AddSkillsMeta[User] {
   def canModerateContent[T <: Mapper[T]](item : T) : Boolean = loggedIn_? && currentUser.openOrThrowException("Empty Box opened").permission == permissionsEnum.moderator
   def canAdministerContent[T <: Mapper[T]](item : T) : Boolean = loggedIn_? && currentUser.openOrThrowException("Empty Box opened").permission == permissionsEnum.administrator
 
-  // save the content of a session before the user gets logged in!
+  def canEditProject [T <: BaseEntityWithTitleDescriptionIconAndCommonFields[T]](item : T) : Boolean = canEditContent(item) && item.createdByUser.get == currentUser.openOrThrowException("Empty Box opened").id.get
+  
   override def capturePreLoginState() = {
     val unsavedContents = ProjectSnippet.unsavedContent.get // is the SessionVar
 
@@ -110,6 +111,8 @@ with OneToMany[Long, User]
 with AddSkills[User]
 with ManyToMany
 {
+    // important: user has to be saveable without login (for register, ...)
+  override val userHasToBeLoggedInForSave = false
 
   // redefine the validations
   // TODO: there is a bug, that title is always less than 5 characters
