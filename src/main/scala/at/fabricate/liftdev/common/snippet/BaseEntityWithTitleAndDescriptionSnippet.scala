@@ -421,7 +421,13 @@ abstract class BaseEntityWithTitleAndDescriptionSnippet[T <: BaseEntityWithTitle
      "#language *" #> translation.language.isAsLocale.getDisplayLanguage &
      "#title *"  #> translation.title.asHtml &
      "#teaser *"  #> translation.teaser.get &
-     "#teaser-short *"  #> (translation.teaser.get.substring(0,147)+"...") &
+     "#teaser-short *"  #> {n : NodeSeq => {
+       val teaser = translation.teaser.get
+       if (teaser.length()>150)
+         (teaser.substring(0,147)+"...")
+       else
+         teaser
+           }}&
      "#description *"  #> description &
      "#shortinfo" #> getShortInfoForItem(item)  &
      "#created *+"  #> item.createdAt.asHtml  &
