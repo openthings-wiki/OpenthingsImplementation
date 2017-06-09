@@ -45,7 +45,7 @@ import net.liftweb.http.S
 	val mature = MultiLanguageValue(state6,wrapSpanWithClass("icon-indication-bar5",state6))
 	val undefined = MultiLanguageValue(state7,wrapSpanWithClass("icon-flag",state7))
 	
-	val downToMatureList = mature  :: Nil
+	val downToMatureList = undefined :: mature  :: Nil
     val downToAdvanced = advanced   :: downToMatureList
     val downToEvolved = evolved  :: downToAdvanced
     val downToDevAdvanced = dev_advanced     :: downToEvolved
