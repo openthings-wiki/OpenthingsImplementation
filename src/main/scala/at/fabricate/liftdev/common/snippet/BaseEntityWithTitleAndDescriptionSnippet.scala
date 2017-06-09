@@ -421,6 +421,7 @@ abstract class BaseEntityWithTitleAndDescriptionSnippet[T <: BaseEntityWithTitle
      "#language *" #> translation.language.isAsLocale.getDisplayLanguage &
      "#title *"  #> translation.title.asHtml &
      "#teaser *"  #> translation.teaser.get &
+     "#teaser-short *"  #> (translation.teaser.get.substring(0,147)+"...") &
      "#description *"  #> description &
      "#shortinfo" #> getShortInfoForItem(item)  &
      "#created *+"  #> item.createdAt.asHtml  &
