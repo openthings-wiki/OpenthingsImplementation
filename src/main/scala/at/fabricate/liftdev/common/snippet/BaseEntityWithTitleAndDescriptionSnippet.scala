@@ -423,7 +423,9 @@ abstract class BaseEntityWithTitleAndDescriptionSnippet[T <: BaseEntityWithTitle
      "#teaser *"  #> translation.teaser.get &
      "#teaser-short *"  #> {n : NodeSeq => {
        val teaser = translation.teaser.get
-       if (teaser.length()>150)
+       if ( teaser == null) 
+         ""
+       else if (teaser.length()>150)
          (teaser.substring(0,147)+"...")
        else
          teaser
