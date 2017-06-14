@@ -11,6 +11,7 @@ import net.liftweb.mapper.Mapper
 import net.liftweb.util._
 import net.liftweb.common._
 import net.liftweb.util.Helpers._
+import at.fabricate.liftdev.common.model.BaseEntityWithTitleDescriptionIconAndCommonFields
 
 object ProjectSnippet extends BaseEntityWithTitleAndDescriptionSnippet[Project] with BaseEntityWithTitleDescriptionIconAndCommonFieldsSnippet[Project]
 with AddRepositorySnippet[Project]
@@ -30,7 +31,8 @@ with AddImagesSnippet[Project]
     
     // configuration for lazy login
       def checkIfUserCanSave[T <: Mapper[T]](item : T) = User.canEditContent(item)|| User.canModerateContent(item) || User.canAdministerContent(item)
-      def checkIfUserCanUploadToRepo[T <: Mapper[T]](item : T) = User.canEditContent(item)
+      def checkIfUserCanUploadToRepo[T <: Mapper[T]](item : T) = checkIfUserCanSave(item)
+      def checkIfUserCanSaveProject[T <: BaseEntityWithTitleDescriptionIconAndCommonFields[T]](item : T) = User.canEditProject(item)|| User.canModerateContent(item) || User.canAdministerContent(item)
 
       
       val loginLocation = "/"+LoginSnippet.loginTemlate // "/"+
@@ -39,11 +41,10 @@ with AddImagesSnippet[Project]
       def theUserSnippet = UserSnippet
       
 
-
       val contentLanguage = UrlLocalizer.contentLocale
       
       private def disableEditing(item : ItemType)(n: NodeSeq): NodeSeq = {    
-         if (checkIfUserCanSave(item)){
+         if (checkIfUserCanSaveProject(item)){
            n
          }
          else {
