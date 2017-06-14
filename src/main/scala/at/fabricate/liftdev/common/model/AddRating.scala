@@ -26,11 +26,17 @@ import net.liftweb.mapper.MappedDate
 import java.util.Date
 import org.joda.time.DateTime
 import net.liftweb.mapper.MappedDateTime
+import net.liftweb.mapper.MegaProtoUser
+import net.liftweb.mapper.MetaMegaProtoUser
+import net.liftweb.mapper.CreatedUpdated
 
 trait AddRating[T <: (AddRating[T]) ] extends BaseEntity[T]  with OneToMany[Long, T] { // 
 	self: T =>
 	  
-	  def getCurrentUser : Box[ProtoUser[_]]
+	  type TheUserType <: MegaProtoUser[TheUserType] with BaseEntityWithTitleAndDescription[TheUserType]
+	  def theUserObject : MetaMegaProtoUser[TheUserType] with BaseMetaEntityWithTitleAndDescription[TheUserType]
+	  
+      def getCurrentUser : Box[ProtoUser[_]]
 	  
       type TheRatedType = T
       
@@ -75,23 +81,15 @@ trait AddRating[T <: (AddRating[T]) ] extends BaseEntity[T]  with OneToMany[Long
 with Cascade[TheRating]
 
       
-      class TheRating extends LongKeyedMapper[TheRating] with IdPK { // TODO:  with CreatedUpdated
+      class TheRating extends LongKeyedMapper[TheRating] with IdPK with CreatedUpdated { 
     	  def getSingleton = TheRating
 	    	  
 	      object ratedItem extends MappedLongForeignKey(this,self.getSingleton)
     	  
-    	  /*
-    	   * TODO: Use that author instead of the other one!
-    	  object author extends MappedLongForeignKey(this,theUserObject){
+          object authorId extends MappedLongForeignKey(this,theUserObject){
     	    override def defaultValue = getCurrentUser.map(_.id.get).openOr(-1)
     	  }
-    	  * 
-    	  */
-    	  
-		  object author extends MappedString(this, 40){
 
-    	    override def defaultValue = getCurrentUser.map(user => "%s %s".format(user.firstName, user.lastName )) openOr("")
-    	  }
 		  object rating extends MappedInt(this){		    
 		  }
 		  
@@ -116,7 +114,14 @@ with Cascade[TheRating]
 		  0.0d
   }
 
-
+  //returns true if there is one or more rating 
+  //with the current user id as authorId for this project
+  def hasRated() : Boolean = 
+  {
+     val currentUserId : Long = getCurrentUser.map(_.id.get) openOr -1
+     val filtered = ratings.filter(_.authorId == currentUserId)
+     filtered.length > 0
+  }
       
 }
 

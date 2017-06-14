@@ -6,11 +6,11 @@
         <h3 id="viewImageTitle">imageTitle</h3>
         <h5 id="viewImageDescription">imageDescription</h5>
         <br/>
-        <button class="insertButton" id="insertButton" onclick="insertAtCursor($('.wysiwyg-descriptionfield-editform')[0],'!http://dummy.nok(dummy)!')" data-lift="L10n.i">project_description_add_image</button> 
+        <button class="insertButton" id="insertButton" onclick="insertAtCursor($('.wysiwyg-descriptionfield-editform')[0],'!http://dummy.nok(dummy)!')" data-lift="L10n.i">project_description_add_image</button>
       </div>
     </li>
   </ul>
-     
+
   <form data-lift="form.ajax" class="image-upload">
     <label id="imagelabel" data-lift="L10n.i">project_image_upload</label>
     <input id="imageUpload" type="file" ></input>
@@ -29,11 +29,11 @@
     <script src="/js/jquery.fileupload-process.js"></script>
     <script src="/js/jquery.fileupload-image.js"></script>
   </lift:with-resource-id>
-  
+
 <script>
 function uploadImageToServer(inputToUpload, destination) {
-var file_data = $(inputToUpload).prop('files'); 
-$('#imageuploadform').fileupload('send', {files: file_data, url: destination}); 
+var file_data = $(inputToUpload).prop('files');
+$('#imageuploadform').fileupload('send', {files: file_data, url: destination});
 }
 </script>
 <script id="imageuploadconfig">

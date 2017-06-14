@@ -1,6 +1,8 @@
-.tagsSection{
+.tagsSection {
 	width: 100%;
-     border-bottom: 1px solid $lightgrey;
+  border-bottom: 1px solid $lightgrey;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 #selecttags{
@@ -43,6 +45,15 @@
 	margin-bottom: $xsmall-em;
 	width: 100%;
 }
+.editPage {
+	display: flex;
+	flex-wrap: wrap;
+
+	form {
+		width: 100%;
+	}
+}
+
 #listtags li a{
 	color: white;
 }

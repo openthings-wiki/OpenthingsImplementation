@@ -1,6 +1,13 @@
 .logo, .shareDesignBtn, .mainNavigation li, .mainNavigation li a{
 	height: 100%;
 }
+
+.mainNavigation li.searchbar {
+	@include breakpoint(m) {
+		display: none;
+	}
+}
+
 .mainNavigation{
 	background-color: rgba($canvas, .9);
 	width: 100%;

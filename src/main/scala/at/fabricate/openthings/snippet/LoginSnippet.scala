@@ -41,16 +41,19 @@ object LoginSnippet extends CustomizeUserHandlingSnippet[User](User,UserSnippet)
     }
       
     def account(xhtml: NodeSeq): NodeSeq = {
-      		if (User.loggedIn_? )
+            val cur_id = User.currentUser.map(_.id) openOr -1;
+            if (User.loggedIn_? && cur_id != -1 )
             	(
             	 "#login" #> "" &
             	  "#landingsection" #> "" &
-            	  "#onlinestatus [class]" #> "loggedIn"
+            	  "#onlinestatus [class]" #> "loggedIn" &
+                  "#profile [href]" #> s"/designer/view/${cur_id}"
             )(xhtml)
             	else
             	(
             	 "#logout" #> "" &
             	"#account" #> ""&
+                  "#profile" #> "" &
             	  "#onlinestatus [class]" #> "notLoggedIn"&
             	  "#addproject [onClick]" #> "LoginScreen();"
             	

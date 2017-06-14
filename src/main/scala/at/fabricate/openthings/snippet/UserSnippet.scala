@@ -8,10 +8,8 @@ import scala.xml.NodeSeq
 import net.liftweb.util._
 import net.liftweb.common._
 import net.liftweb.util.Helpers._
-import net.liftweb.mapper.Descending
-import net.liftweb.mapper.OrderBy
-import net.liftweb.mapper.MaxRows
-import net.liftweb.mapper.StartAt
+import net.liftweb.mapper.{By, Descending, In, KeyedMapper, Like, MaxRows, OrderBy, QueryParam, StartAt, BySql, IHaveValidatedThisSQL, NotNullRef}
+import at.fabricate.liftdev.common.model.{BaseEntityWithTitleAndDescription, BaseEntityWithTitleDescriptionIconAndCommonFields, BaseMetaEntityWithTitleDescriptionIconAndCommonFields, DifficultyEnum, LicenceEnum, StateEnum}
 import model.Project
 import scala.xml.Text
 import net.liftweb.http.SHtml
@@ -104,8 +102,28 @@ with AddSkillsSnippet[User]  {
    (super.asHtml(item))
   }
 
-   // remove this features
+  // remove these features
   override def create(xhtml: NodeSeq) : NodeSeq  = notAvailable
-  
   override def edit(xhtml: NodeSeq) : NodeSeq  =  notAvailable
+  
+  //return all users that are on the current page
+  def queryItems(extraParams : List[QueryParam[User]]) : List[User] = {
+    
+    val hasProjectsClause : QueryParam[User] = BySql("(select count(*) from project where initiator = user.id > 0)", IHaveValidatedThisSQL("taco","2017-05-04"))
+    val hasIconClause : QueryParam[User] = NotNullRef(User.icon)
+
+    var query : List[QueryParam[User]] = List(hasIconClause, hasProjectsClause)
+    query = extraParams ::: query //concatenate the two lists
+    
+    User.findAll(query:_*)
+  }
+  
+  override def count = queryItems(List()).length
+  
+  override def page = {
+      val startClause : QueryParam[User] = StartAt(curPage*itemsPerPage)
+      val maxClause : QueryParam[User] = MaxRows(itemsPerPage)
+      val limit : List[QueryParam[User]] = List(startClause, maxClause)
+      queryItems(limit)
+  }
 }

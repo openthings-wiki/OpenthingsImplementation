@@ -43,11 +43,11 @@
 }
 
 .signupHome{
-	max-width: 26em;
+	max-width: 23.4375em;
 	background: white;
 	margin-left: auto;
-
 }
+
 .signupHome input{
 	width: 100%;
 	margin-bottom: $xsmall-em;
@@ -102,6 +102,8 @@
 .explainItems{
 	width: 80%;
 	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
 }
 .explainItems li h3{
 	font-size: 1.4em;
