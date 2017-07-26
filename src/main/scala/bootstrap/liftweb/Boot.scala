@@ -168,6 +168,7 @@ https://www.assembla.com/spaces/liftweb/wiki/Cross_Origin_Resource_Sharing
                Menu.i("SASS") / "sass" / ** >> Hidden,
 // this seems to be not necessary
                Menu.i("API") / "api" / ** >> Hidden,
+               Menu.i("Password reset") / "get_new_password"  >> Hidden,
                Menu.i("Page not found!") / "404"  >> Hidden,               
                // TODO: double definition, dont do that here
                //Menu.i("Validate") / "validate_user" / * >> Hidden,
