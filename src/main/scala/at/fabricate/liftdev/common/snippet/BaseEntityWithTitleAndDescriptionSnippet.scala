@@ -166,7 +166,7 @@ abstract class BaseEntityWithTitleAndDescriptionSnippet[T <: BaseEntityWithTitle
        successAction : () => JsCmd = () => JsCmds.Noop, 
        errorAction : List[FieldError] => JsCmd = errors => JsCmds.Noop, 
        idToDisplayMessages : String, 
-       successMessage : String  = "Saved changes!", errorMessage: String  = "Error saving item!") : JsCmd =
+       successMessage : String  = S.?("saved_changes"), errorMessage: String  = S.?("saved_changes_error")) : JsCmd =
 		   save[JsCmd,T](item,
 		    () => {
 		      // TODO: maybe decide which one to use?
