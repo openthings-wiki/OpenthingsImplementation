@@ -58,7 +58,7 @@ trait CustomizeUserHandling[T <: MegaProtoUser[T] with BaseEntityWithTitleAndDes
           <title>{S.?("sign.up.confirmation")}</title>
         </head>
         <body>
-          <p>{S.?("dear")} {user.defaultTranslation.obj.map { userTranslation => userTranslation.title }},
+          <p>{S.?("dear")} {user.defaultTranslation.obj.map { userTranslation => userTranslation.title.get }.openOr("...")},
             <br/>
             <br/>
             {S.?("sign.up.validation.link")} 
@@ -67,7 +67,6 @@ trait CustomizeUserHandling[T <: MegaProtoUser[T] with BaseEntityWithTitleAndDes
             <br/>
             <br/>
             {S.?("thank.you")}
-            <br/>
             <br/>
             {S.?("signature")}
           </p>
