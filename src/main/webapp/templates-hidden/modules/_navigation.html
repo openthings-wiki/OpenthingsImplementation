@@ -1,47 +1,34 @@
 <nav class="mainNavigation left">
   <div class="openMenu"><p class="left"><span class="icon-down"></span></p>
-  <div data-lift="Search.form?eager_eval=true" class="right searchbar">
-  <form id="searchform" class="left" method="get" action="#">
-  <input id="easysearch" placeholder="Search" type="text"  name="#">
-  <button type="submit"><span class="icon-loupe"></span></button>
-  </form>
-  </div>
+    <div data-lift="Search.form?eager_eval=true" class="right searchbar">
+      <form id="searchform" class="left" method="get" action="#">
+        <input id="easysearch" placeholder="Search" type="text"  name="#">
+        <button type="submit"><span class="icon-loupe"></span></button>
+      </form>
+    </div>
   </div>
   <ul class="left" data-lift="Login.account">
-  <li><a href="/index" class="logo"><span class="logobee"></span></a></li>
-  <li><a href="/project/list" data-lift="L10n.i">projects</a></li>
-  <!--
-  <li class="left"><a href="/static/tutorials">Tutorials</a></li>
-  <li class="left"><a href="/designer/list">Gurus</a></li>
-  -->
-  <li><a href="/designer/list" data-lift="L10n.i">bees</a></li>
-  <!--
-  <li class="left"><a href="/designer/list">Maker spaces</a></li>
-  <li class="left"><a href="/designer/list">Machines</a></li>
--->
+    <li><a href="/index" class="logo"><span class="logobee"></span></a></li>
+    <li><a href="/project/list" data-lift="L10n.i">projects</a></li>
+    <li><a href="/designer/list" data-lift="L10n.i">bees</a></li>
+    <li><a href="#profile" id="profile" href="#profile" data-lift="L10n.i">my_profile</a></li>
+    <li><a href="/logout" data-lift="L10n.i">Logout</a></li>
+    <li><a href="#login" id="login" class="loginBtn" data-lift="L10n.i" onClick="LoginScreen();">login_register</a></li>
+    <li data-lift="Login.account" class="right">
+      <a id="addproject" href="#addproject" class="shareDesignBtn" onClick="AddProject();"><span class="icon-plus"></span> <span data-lift="L10n.i">add_a_project</span></a>
+    </li>
+    <li data-lift="Search.form?eager_eval=true" class="right searchbar">
+      <form id="searchform" class="left" method="get" action="#">
+        <input id="easysearch" placeholder="search_placeholder" data-lift="L10n.placeholder" type="text"  name="#">
+        <button type="submit"><span class="icon-loupe"></span></button>
+      </form>
+    </li>
+  </ul>
 
-<li><a href="#profile" id="profile" href="#profile" data-lift="L10n.i">my_profile</a></li>
-<li><a href="/logout" data-lift="L10n.i">Logout</a></li>
-<li><a href="#login" id="login" class="loginBtn" data-lift="L10n.i" onClick="LoginScreen();">login_register</a></li>
-
-
-
-<li data-lift="Login.account" class="right">
-  <a id="addproject" href="#addproject" class="shareDesignBtn" onClick="AddProject();"><span class="icon-plus"></span> <span data-lift="L10n.i">add_a_project</span></a>
-</li>
-<li data-lift="Search.form?eager_eval=true" class="right searchbar">
-  <form id="searchform" class="left" method="get" action="#">
-  <input id="easysearch" placeholder="search_placeholder" data-lift="L10n.placeholder" type="text"  name="#">
-  <button type="submit"><span class="icon-loupe"></span></button>
-  <!--				<button>Advanced</button>-->
-  </form>
-</li>
-</ul>
-
-<!-- <div data-lift="Login.language" class="select-style right">
-<form id="languageform" data-lift="form.ajax">
-<select id="selectLanguage" >
-<option>Select language</option>
+  <!-- <div data-lift="Login.language" class="select-style right">
+  <form id="languageform" data-lift="form.ajax">
+  <select id="selectLanguage" >
+  <option>Select language</option>
 </select>
 </form>
 </div> -->
