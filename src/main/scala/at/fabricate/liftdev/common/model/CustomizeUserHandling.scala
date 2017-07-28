@@ -15,6 +15,7 @@ import net.liftweb.util.Mailer.BCC
 import net.liftweb.common.Empty
 import net.liftweb.util.Helpers._
 import net.liftweb.util.Mailer.MailBodyType
+import scala.xml.Elem
 
 trait CustomizeUserHandling[T <: MegaProtoUser[T] with BaseEntityWithTitleAndDescription[T]] extends MetaMegaProtoUser[T]  {
   self: T =>
@@ -49,6 +50,28 @@ trait CustomizeUserHandling[T <: MegaProtoUser[T] with BaseEntityWithTitleAndDes
                     (To(user.getEmail) :: 
                      generateValidationEmailBodies(user, resetLink) :::
                      (bccEmail.toList.map(BCC(_)))) :_* )
+  }
+  
+  override def signupMailBody(user: TheUserType, validationLink: String): Elem = {
+    (<html>
+        <head>
+          <title>{S.?("sign.up.confirmation")}</title>
+        </head>
+        <body>
+          <p>{S.?("dear")} {user.defaultTranslation.obj.map { userTranslation => userTranslation.title.get }.openOr("...")},
+            <br/>
+            <br/>
+            {S.?("sign.up.validation.link")} 
+            <br/>
+						<a href={validationLink}>{validationLink}</a>
+            <br/>
+            <br/>
+            {S.?("thank.you")}
+            <br/>
+            {S.?("signature")}
+          </p>
+        </body>
+     </html>)
   }
 
     

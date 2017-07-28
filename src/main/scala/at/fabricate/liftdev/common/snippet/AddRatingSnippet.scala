@@ -15,6 +15,7 @@ import model.BaseMetaEntityWithTitleAndDescription
 import model.BaseEntityWithTitleAndDescription
 import net.liftweb.http.js.JsCmds.SetHtml
 import net.liftweb.common.Empty
+import net.liftweb.http.S
 
 trait AddRatingSnippet[T <: BaseEntityWithTitleAndDescription[T] with AddRating[T]] extends BaseEntityWithTitleAndDescriptionSnippet[T] {
   
@@ -46,7 +47,9 @@ trait AddRatingSnippet[T <: BaseEntityWithTitleAndDescription[T] with AddRating[
 	           errors => {
 	             errors.map(println(_))
 	             JsCmds.Alert("adding rating failed! " )
-	           },"ratingMessages")
+	           },"ratingMessages",
+	           S.?("saved_rating"),
+	           S.?("saved_rating_error"))
 			          } )
 		   }
 		 }).reduce(_ & _)

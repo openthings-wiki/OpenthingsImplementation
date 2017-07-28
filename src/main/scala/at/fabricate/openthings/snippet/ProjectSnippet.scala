@@ -43,18 +43,18 @@ with AddImagesSnippet[Project]
 
       val contentLanguage = UrlLocalizer.contentLocale
       
-      private def disableEditing(item : ItemType)(n: NodeSeq): NodeSeq = {    
+      private def disableEditing(item : ItemType)(selector : CssSel)(n: NodeSeq): NodeSeq = {    
          if (checkIfUserCanSaveProject(item)){
-           n
+           selector.apply(n)
          }
          else {
            NodeSeq.Empty
          }
   }
  
-        private def disableRepository(item : ItemType)(n: NodeSeq): NodeSeq = {    
+        private def disableRepository(item : ItemType)(selector : CssSel)(n: NodeSeq): NodeSeq = {    
          if (checkIfUserCanUploadToRepo(item)){
-           n
+           selector.apply(n)
          }
          else {
            NodeSeq.Empty
@@ -64,18 +64,18 @@ with AddImagesSnippet[Project]
    override def asHtml(item : ItemType) : CssSel = { 
    (   
        "#personalwebsite" #> "" &
-       "#edit_item_form" #> disableEditing(item) _ &
-       ".edit_project_button" #> disableEditing(item) _ &
-       ".edit_project_repository" #> disableRepository(item) _
+       "#edit_item_form *" #> disableEditing(item)(asHtml(item)) _&
+       ".edit_project_button *" #> disableEditing(item)(asHtml(item)) _ &
+       ".edit_project_repository *" #> disableRepository(item)(asHtml(item)) _
    ) &
    (super.asHtml(item))
   }
    
    override def toForm(item : ItemType) : CssSel = { 
    (   
-       "#edit_item_form" #> disableEditing(item) _ &
-       ".edit_project_button" #> disableEditing(item) _&
-       ".edit_project_repository" #> disableRepository(item) _
+       "#edit_item_form *" #> disableEditing(item)(asHtml(item)) _ &
+       ".edit_project_button *" #> disableEditing(item)(asHtml(item)) _&
+       ".edit_project_repository *" #> disableRepository(item)(asHtml(item)) _
    ) &
    (super.toForm(item))
   }
