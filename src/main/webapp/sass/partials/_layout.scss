@@ -41,6 +41,10 @@ body{
 	max-width: 100%;
 }
 
+.mainContent {
+	min-height: 500px;
+}
+
 .project-header {
 	border-bottom: 1px solid $lightgrey;
 }
@@ -139,4 +143,15 @@ body{
 #list_items {
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.logout-panel {
+	max-width: 600px;
+	margin: auto;
+	padding: 20px;
+	text-align: center;
+}
+
+.bye-icon {
+	font-size: 4em;
 }
