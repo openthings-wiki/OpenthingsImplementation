@@ -36,10 +36,24 @@ with AddSkillsSnippet[User]  {
     
       
       val contentLanguage = UrlLocalizer.contentLocale
+      
+     def checkIfUserIsRegisteredUser[T <: User](userProfile : T) = User.currentUser.map { currentUser => currentUser.id == userProfile.id }.openOr(false)
+
+      
+      
+      private def disableEditing(item : ItemType)(selector : CssSel)(n: NodeSeq): NodeSeq = {    
+         if (checkIfUserIsRegisteredUser(item)){
+           selector.apply(n)
+         }
+         else {
+           NodeSeq.Empty
+         }
+  }
     
    private def bindToolsCSS(toolname : String, checkbox: NodeSeq) = 
 	      ":checkbox" #>  checkbox &
-	      "id=toolname" #>  toolname
+	      "id=toolname" #>  toolname	      
+	 
     
   override def toForm(item : ItemType) : CssSel = {
 	     var userTools = item.tools.map(tool => tool.name.toString)         
@@ -78,7 +92,8 @@ with AddSkillsSnippet[User]  {
            		)                         
    (
        "#personalwebsite [href]" #> item.personalWebsite.get &
-       "#listtools" #> listTools _ &
+       "#listtools" #> listTools _ &       
+       ".edit_user_button *" #> disableEditing(item)(asHtml(item)) _ &
        "#projectbydesigner" #> item.createdProjects.map(project => {
          project.doWithTranslationFor(contentLanguage.get)( translation  =>
                    "#projectbydesignertitle *" #> translation.title.asHtml &
