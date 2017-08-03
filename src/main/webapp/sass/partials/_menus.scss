@@ -8,6 +8,10 @@
 	}
 }
 
+.notLoggedIn .logout-button {
+	display: none;
+}
+
 .mainNavigation{
 	background-color: rgba($canvas, .9);
 	width: 100%;
