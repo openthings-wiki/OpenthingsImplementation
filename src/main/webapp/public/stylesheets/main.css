@@ -1940,6 +1940,10 @@ ul.tagit input[type="text"] {
 .panel-container .popup.images {
   width: calc(50% - 60px);
   margin-left: 60px; }
+  @media (max-width: 79.9em) {
+    .panel-container .popup.images {
+      width: 100%;
+      margin-left: 0; } }
 
 .panel-container .imagesSection {
   display: -webkit-box;

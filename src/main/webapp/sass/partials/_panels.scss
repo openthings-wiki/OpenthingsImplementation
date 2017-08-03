@@ -46,6 +46,12 @@
 	.popup.images {
 		width: calc(50% - 60px);
 		margin-left: 60px;
+
+
+		@include breakpoint(l){
+			width: 100%;
+			margin-left: 0;
+		}
 	}
 	.imagesSection {
 		display: flex;
