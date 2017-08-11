@@ -866,8 +866,8 @@ html, body, .blogMain, .blogArticle, .blogArticle header, .blog {
 .uploadstatus p {
   padding: 0.625em 1.25em;
   background: rgba(251, 192, 45, 0.6);
-  color: white;
-  margin: -0.625em 0 0.625em; }
+  color: #333;
+  margin: 0; }
 
 .select-style {
   border: 1px solid #ccc;
@@ -1536,6 +1536,10 @@ ul.tagit input[type="text"] {
 
 #revertcommit, #resetcommit {
   display: none; }
+
+.uploadstatus {
+  width: 100%;
+  float: left; }
 
 .projectDetails, .userDetails {
   border-bottom: 1px solid #edebeb;
