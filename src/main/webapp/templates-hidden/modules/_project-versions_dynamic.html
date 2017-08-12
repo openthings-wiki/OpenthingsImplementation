@@ -52,6 +52,9 @@
 										UpdateFilelist(file.name);
 									});
 									data.context.text('Upload finished.');
+									setTimeout(function(){
+										data.context.empty();
+									}, 2000);
 							}
 					});
 			});
