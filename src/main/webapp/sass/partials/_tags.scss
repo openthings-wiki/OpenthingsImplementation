@@ -8,7 +8,9 @@
 .tagsSection h2 {
 	width: 100%;
 }
-
+#listtags li {
+    text-transform: capitalize;
+}
 #selecttags{
 	padding: $xsmall-em 0;
 	margin-bottom: $xsmall-em;

@@ -6,6 +6,11 @@ body{
 	overflow-x: hidden;
 }
 
+#lift__noticesContainer__ {
+	z-index: 9999;
+	top: 50px;
+}
+
 .container {
   padding: $big-em;
 
@@ -13,7 +18,6 @@ body{
 		padding: $small-em;
 	}
 }
-
 
 .container.medium {
   padding: $medium-em;
@@ -27,6 +31,10 @@ body{
 .mainContent {
 	display: flex;
 	flex-wrap: wrap;
+}
+
+#main {
+	padding-top: 50px;
 }
 
 .projectComments ul,.mainContent, .projectHeader, .mainContent .projectComments li, .commentInput, .commentInput input, .commentInput textarea, .commentInput form, .addTutorial, .projectComments, .userDetails, .projectDetails, .userProjectVersions, .projectVersions, .detailedDescription, .bom{

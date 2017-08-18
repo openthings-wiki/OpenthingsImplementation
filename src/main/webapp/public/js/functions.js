@@ -3,6 +3,10 @@ function ShowComments(){
   $(".viewcomments").addClass( "commentsopen" );
 }
 
+if ( $('#comments').children().length < 1 ) {
+  $('.viewcomments').remove();
+}
+
 function openComments(){
   $(".projectComments ul").slideDown();
   $(".viewcomments").addClass( "commentsopen" );

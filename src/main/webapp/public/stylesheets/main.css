@@ -941,6 +941,10 @@ html, body, .blogMain, .blogArticle, .blogArticle header, .blog {
 body {
   overflow-x: hidden; }
 
+#lift__noticesContainer__ {
+  z-index: 9999;
+  top: 50px; }
+
 .container {
   padding: 3.125em; }
   @media (max-width: 48.0625em) {
@@ -959,6 +963,9 @@ body {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap; }
+
+#main {
+  padding-top: 50px; }
 
 .projectComments ul, .mainContent, .projectHeader, .mainContent .projectComments li, .commentInput, .commentInput input, .commentInput textarea, .commentInput form, .addTutorial, .projectComments, .userDetails, .projectDetails, .userProjectVersions, .projectVersions, .detailedDescription, .bom {
   width: 100%; }
@@ -1355,6 +1362,9 @@ body {
 .tagsSection h2 {
   width: 100%; }
 
+#listtags li {
+  text-transform: capitalize; }
+
 #selecttags {
   padding: 0.625em 0;
   margin-bottom: 0.625em;
@@ -1580,7 +1590,10 @@ ul.tagit input[type="text"] {
 
 .projectComments header {
   background-color: white;
-  width: 100%; }
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
 
 .projectComments div {
   width: 50%; }
