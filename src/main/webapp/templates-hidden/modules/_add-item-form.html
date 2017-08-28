@@ -16,8 +16,8 @@
     </div>
 
     <div class="input-row">
-      <label data-lift="L10n.i">project_intro_text</label>
-      <textarea id="wysiwyg" class="wysiwyg wysiwyg-descriptionfield-addform" placeholder="Project description" rows="8" required minlength="10" maxlength="65000"></textarea>
+      <!-- <label data-lift="L10n.i">project_intro_text</label> -->
+      <textarea id="wysiwyg" class="wysiwyg wysiwyg-descriptionfield-addform" placeholder="Project description" rows="8" required minlength="10" maxlength="65000" style="display:none;"></textarea>
     </div>
     <script id="update_description_preview"></script>
     <div class="input-row">
@@ -51,4 +51,9 @@
     <input id="itemsubmithidden" type="hidden">
     <button type="submit" id="save">Save</button>
   </form>
+<script>
+$('#teaser').change(function() {
+    $('#wysiwyg').val($(this).val());
+});
+</script>
 </div>
