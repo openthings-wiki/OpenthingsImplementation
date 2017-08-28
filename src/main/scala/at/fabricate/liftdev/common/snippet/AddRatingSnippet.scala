@@ -16,6 +16,7 @@ import model.BaseEntityWithTitleAndDescription
 import net.liftweb.http.js.JsCmds.SetHtml
 import net.liftweb.common.Empty
 import net.liftweb.http.S
+import net.liftweb.http.js.JsCmds.After
 
 trait AddRatingSnippet[T <: BaseEntityWithTitleAndDescription[T] with AddRating[T]] extends BaseEntityWithTitleAndDescriptionSnippet[T] {
   
@@ -40,7 +41,11 @@ trait AddRatingSnippet[T <: BaseEntityWithTitleAndDescription[T] with AddRating[
 	       saveAndDisplayAjaxMessages(newRating,
 	           () => {
 				 // update the ratings
-				SetHtml("rating", generateDisplayRating(item)) &
+				SetHtml("rating", (item.accumulatedRatings.get match {
+				  case 0.0d => generateDisplayRating(newRating.rating.get)
+				  case _ => generateDisplayRating(item.accumulatedRatings.get)
+				  }
+				)) &
 //				 // hide the form
 				SetHtml("newrating",NodeSeq.Empty )
 	           }, 
@@ -56,10 +61,10 @@ trait AddRatingSnippet[T <: BaseEntityWithTitleAndDescription[T] with AddRating[
  	 }
 
   
-  def generateDisplayRating(item : ItemType) : NodeSeq = {
+  def generateDisplayRating(rating : Double) : NodeSeq = {
 //    if (item.accumulatedRatings == null) 
 //      return Text("no ratings available")
-    item.accumulatedRatings.get match {
+     rating match {
       case 0.0 => Text("no ratings available")
       case someNumber if someNumber != null => Text("%1.2f".format(someNumber))
       case _ => Text("no ratings available")
@@ -72,13 +77,13 @@ trait AddRatingSnippet[T <: BaseEntityWithTitleAndDescription[T] with AddRating[
   abstract override def asHtml(item : ItemType) : CssSel = {
 	
     if(!item.hasRated()){
-     ("#rating" #> generateDisplayRating(item)  &
+     ("#rating *" #> generateDisplayRating(item.accumulatedRatings.get)  &
      "#newrating" #> bindNewRatingCSS(item)) &
      (super.asHtml(item))
     }
     else
     {
-      ("#rating" #> generateDisplayRating(item))  &
+      ("#rating *" #> generateDisplayRating(item.accumulatedRatings.get))  &
      "#newrating" #> NodeSeq.Empty &
      (super.asHtml(item))
     }
