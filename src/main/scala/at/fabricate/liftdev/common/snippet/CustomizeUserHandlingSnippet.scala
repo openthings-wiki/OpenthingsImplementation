@@ -61,8 +61,8 @@ class CustomizeUserHandlingSnippet[T <: MegaProtoUser[T] with BaseEntityWithTitl
 
     def allTemplates : List[String] = List(loginTemlate,logoutTemlate,signUpTemlate,lostPasswordTemlate,resetPasswordTemlate,validateUserTemlate)
     
-    def loggedInMessage : NodeSeq = Text("ERROR - You are already logged in!")
-    def notLoggedInMessage : NodeSeq = Text("ERROR - You are not logged in!")
+    def loggedInMessage : NodeSeq = Text("You are already logged in!")
+    def notLoggedInMessage : NodeSeq = Text("You are not logged in!")
 
 
     def getMenu = 
@@ -212,11 +212,14 @@ class CustomizeUserHandlingSnippet[T <: MegaProtoUser[T] with BaseEntityWithTitl
 
     def logout(xhtml: NodeSeq): NodeSeq = {
       		if (userObject.loggedIn_? ){
-            	("#logouthidden" #> SHtml.hidden(()=>userObject.customLogout(S.uri)) &
+            	("#logouthidden" #> SHtml.hidden(()=>userObject.customLogout("/index")) &
             	 "#logoutform [action]" #> S.uri).apply(xhtml)
       		}
             	else
-            	  notLoggedInMessage
+            	  if (!(S.uri == "/" || S.uri.startsWith("/index")))
+            	    S.redirectTo("/index")
+            	  else
+            	    notLoggedInMessage
   }
   
 }
