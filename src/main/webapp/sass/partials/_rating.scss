@@ -20,3 +20,12 @@
 .isRated5 span:nth-child(-n+5), .rated5 span:nth-child(-n+5){
 	color: $defaultLinkColor;
 }
+
+.rated-star {
+	top: -0.02em;
+	pointer-events: none;
+}
+
+#rating {
+	pointer-events: none;
+}

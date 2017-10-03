@@ -2083,6 +2083,13 @@ ul.tagit input[type="text"] {
 .isRated5 span:nth-child(-n+5), .rated5 span:nth-child(-n+5) {
   color: #17BA9B; }
 
+.rated-star {
+  top: -0.02em;
+  pointer-events: none; }
+
+#rating {
+  pointer-events: none; }
+
 .userHeader .projectMainDes {
   width: 100% !important; }
 
