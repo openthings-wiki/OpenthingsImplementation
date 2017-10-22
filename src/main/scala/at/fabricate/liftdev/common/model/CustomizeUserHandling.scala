@@ -69,6 +69,33 @@ trait CustomizeUserHandling[T <: MegaProtoUser[T] with BaseEntityWithTitleAndDes
             {S.?("thank.you")}
             <br/>
             {S.?("signature")}
+            <br/>
+            <br/>
+            {S.?("mail.ps")}
+          </p>
+        </body>
+     </html>)
+  }
+  
+   override def passwordResetMailBody(user: TheUserType, resetLink: String): Elem = {
+    (<html>
+        <head>
+          <title>{S.?("reset.password.confirmation")}</title>
+        </head>
+        <body>
+          <p>{S.?("dear")} {user.defaultTranslation.obj.map { userTranslation => userTranslation.title.get }.openOr("...")},
+            <br/>
+            <br/>
+            {S.?("click.reset.link")}
+            <br/><a href={resetLink}>{resetLink}</a>
+            <br/>
+            <br/>
+            {S.?("thank.you")}
+            <br/>
+            {S.?("signature")}
+            <br/>
+            <br/>
+            {S.?("mail.ps")}
           </p>
         </body>
      </html>)
