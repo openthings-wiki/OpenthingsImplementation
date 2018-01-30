@@ -216,10 +216,7 @@ class CustomizeUserHandlingSnippet[T <: MegaProtoUser[T] with BaseEntityWithTitl
             	 "#logoutform [action]" #> S.uri).apply(xhtml)
       		}
             	else
-            	  if (!(S.uri == "/" || S.uri.startsWith("/index")))
-            	    S.redirectTo("/index")
-            	  else
-            	    notLoggedInMessage
+            	  notLoggedInMessage
   }
   
 }
